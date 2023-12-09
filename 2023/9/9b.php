@@ -58,7 +58,7 @@ function getFinalSequenceNumbersUp(array $sequence): int
 
 $totalSum = 0;
 foreach ($sensors as $sensor) {
-    //Per sensor, we need all the numbers and sum up the result of our recursive magic
+    //Per sensor, we need all the numbers (this time reversed to get the beginning) and sum up the result of our recursive magic
     $numbers = array_reverse(explode(' ', $sensor));
     $totalSum += getFinalSequenceNumberDown($numbers, [$numbers]);
 }
