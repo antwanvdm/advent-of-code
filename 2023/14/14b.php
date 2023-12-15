@@ -98,7 +98,7 @@ function moveLines($lines): array
 }
 
 $candidates = [];
-for ($i = 1; $i <= 500; $i++) {
+for ($i = 1; $i <= 200; $i++) {
     //All cycles a few numbers of times to get a pattern
     $lines = cycle($lines);
     $prevSum = $sum ?? 0;
