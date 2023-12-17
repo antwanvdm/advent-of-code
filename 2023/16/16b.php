@@ -108,25 +108,54 @@ function checkTile($tile, &$position, &$positions, &$splitsDone): bool
     return true;
 }
 
-$splitsDone = [];
-$positions = [['row' => 0, 'column' => 0, 'direction' => 'right']];
-$energizedTiles = [['row' => 0, 'column' => 0, 'direction' => 'right']];
+/**
+ * The same code as 16a, but now in a method to re-use :)
+ *
+ * @param $contraptionLines
+ * @param $startPosition
+ * @return int
+ */
+function getTotalEnergizedTilesForStartPosition($contraptionLines, $startPosition): int
+{
+    $splitsDone = [];
+    $positions = [$startPosition];
+    $energizedTiles = [$startPosition];
 
-//Kep looping as long as some paths are still being followed
-while (count($positions) > 0) {
-    foreach ($positions as $index => &$position) {
-        if (!isset($contraptionLines[$position['row']]) || !isset($contraptionLines[$position['row']][$position['column']])) {
-            unset($positions[$index]);
-        } elseif (!checkTile($contraptionLines[$position['row']][$position['column']], $position, $positions, $splitsDone)) {
-            unset($positions[$index]);
-        }
+    //Kep looping as long as some paths are still being followed
+    while (count($positions) > 0) {
+        foreach ($positions as $index => &$position) {
+            if (!isset($contraptionLines[$position['row']]) || !isset($contraptionLines[$position['row']][$position['column']])) {
+                unset($positions[$index]);
+            } elseif (!checkTile($contraptionLines[$position['row']][$position['column']], $position, $positions, $splitsDone)) {
+                unset($positions[$index]);
+            }
 
-        //Only add when next path is available
-        if (isset($contraptionLines[$position['row']][$position['column']])) {
-            $energizedTiles[] = $position;
+            //Only add when next path is available
+            if (isset($contraptionLines[$position['row']][$position['column']])) {
+                $energizedTiles[] = $position;
+            }
         }
     }
+
+    //Remove double records before echo
+    return count(array_unique(array_map(fn($tile) => $tile['row'] . ',' . $tile['column'], $energizedTiles)));
 }
 
-//Remove double records before echo
-echo count(array_unique(array_map(fn($tile) => $tile['row'] . ',' . $tile['column'], $energizedTiles)));
+$options = [];
+//Loop through options and add all possible outcomes (starting top, left, right, bottom)
+for ($i = 0; $i < count($contraptionLines); $i++) {
+    for ($j = 0; $j < count($contraptionLines[0]); $j++) {
+        if ($i === 0) {
+            $options[] = getTotalEnergizedTilesForStartPosition($contraptionLines, ['row' => $i, 'column' => $j, 'direction' => 'down']);
+        }
+        if ($i === count($contraptionLines) - 1) {
+            $options[] = getTotalEnergizedTilesForStartPosition($contraptionLines, ['row' => $i, 'column' => $j, 'direction' => 'up']);
+        }
+    }
+
+    $options[] = getTotalEnergizedTilesForStartPosition($contraptionLines, ['row' => $i, 'column' => 0, 'direction' => 'right']);
+    $options[] = getTotalEnergizedTilesForStartPosition($contraptionLines, ['row' => $i, 'column' => count($contraptionLines[0]) - 1, 'direction' => 'left']);
+}
+
+//Get the maximum number out of all options
+echo max($options);
