@@ -98,7 +98,7 @@ function countEnclosedDots($matrix, $row, $col, &$visited): int
         return 0;
     }
 
-    // Count the current dot and recursively explore neighbors
+    //Count the current dot and recursively explore neighbors
     $count = 1;
     $count += countEnclosedDots($matrix, $row + 1, $col, $visited);
     $count += countEnclosedDots($matrix, $row - 1, $col, $visited);
