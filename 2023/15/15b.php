@@ -1,6 +1,6 @@
 <?php
-/** @var array $data */
-require_once '15-data.php';
+//And the easiest data parsing of the year
+$data = file_get_contents('15-data.txt');
 
 /**
  * For every hash: Get ASCII for string, multiply by 17 and get remainder of 256
