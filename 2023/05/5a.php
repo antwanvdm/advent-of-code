@@ -1,10 +1,16 @@
 <?php
-/** @var array $seedsData */
-require_once '5-data.php';
+//Probably most complex data parsing of the year
+$data = preg_split("/\r\n\r\n|\n\n|\r\r/", file_get_contents('5-data.txt'));
+$seeds = explode(' ', str_replace('seeds: ', '', $data[0]));
+array_shift($data);
+$seedsData = array_column(array_map(function ($line) {
+    $lines = preg_split("/\r\n|\n|\r/", $line);
+    $source = str_replace(' map:', '', array_shift($lines));
+    return [$source, $lines];
+}, $data), 1, 0);
 
-//Get the initial row for starting numbers and array to store all our final locations numbers
+//Array to store all our final locations numbers
 $locations = [];
-$seeds = explode(' ', array_shift($seedsData));
 
 foreach ($seeds as $seed) {
     //Store current location which will be overridden for every next step in the transport
