@@ -1,6 +1,8 @@
 <?php
 $lines = preg_split("/\r\n|\n|\r/", file_get_contents('12-data.txt'));
 
+//TODO: I need to re-think my approach. 12a already took 5-6 seconds to compute...
+
 /**
  * Recursive loop to get all possible combinations of # and . in place of all ? in the string
  *
