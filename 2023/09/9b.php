@@ -1,6 +1,5 @@
 <?php
-/** @var array $sensors */
-require_once '9-data.php';
+$sensors = preg_split("/\r\n|\n|\r/", file_get_contents('9-data.txt'));
 
 /**
  * @param array $numbers
