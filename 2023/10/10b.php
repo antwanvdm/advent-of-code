@@ -2,6 +2,11 @@
 $data = preg_split("/\r\n|\n|\r/", file_get_contents('10-data.txt'));
 $paths = array_map(fn($path) => str_split($path), $data);
 
+//Als ik langs iets kom wat ik al heb gehad (oftewel alles wat is aangeraakt door mijn previous paths en ook weer aangeraakt wordt door mijn nieuwe path
+//Vorige eind array gebruiken als startinput. Vanuit hier weten wat het pad is geweest en wat er dus 'enclosed' is.
+//Letten op bochten en vanuit daar redeneren
+//Pad is 13646 van de beschikbare 19600 karakters.
+
 //Map all possibilities per tile
 $pipes = [
     '.' => ['top' => [], 'down' => [], 'left' => [], 'right' => []], //Nothing
@@ -102,6 +107,11 @@ $nextPaths = [
     0 => ['line' => $currentLineIndex, 'index' => $currentIndex - 1],
     1 => ['line' => $currentLineIndex, 'index' => $currentIndex + 1],
 ];
+//SAMPLE DATA PATH SITUATION
+//$nextPaths = [
+//    0 => ['line' => $currentLineIndex + 1, 'index' => $currentIndex],
+//    1 => ['line' => $currentLineIndex, 'index' => $currentIndex + 1],
+//];
 
 //Let's store the first to routes we walked so we can always check we don't go back in the route
 $previousPaths = [
