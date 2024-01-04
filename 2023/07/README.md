@@ -1,4 +1,9 @@
-<article class="day-desc"><h2>--- Day 7: Camel Cards ---</h2><p>Your all-expenses-paid trip turns out to be a one-way, five-minute ride in an <a href="https://en.wikipedia.org/wiki/Airship" target="_blank">airship</a>. (At least it's a <span title="Please only read this sentence while listening to 'The Airship Blackjack' from the Final Fantasy 6 soundtrack."><em>cool</em> airship</span>!) It drops you off at the edge of a vast desert and descends back to Island Island.</p>
+<article class="day-desc"><h2>--- Day 7: Camel Cards ---</h2>
+<ul>
+<li><a href="7a.php">Part 1</a></li>
+<li><a href="7b.php">Part 2</a></li>
+</ul>
+<p>Your all-expenses-paid trip turns out to be a one-way, five-minute ride in an <a href="https://en.wikipedia.org/wiki/Airship" target="_blank">airship</a>. (At least it's a <span title="Please only read this sentence while listening to 'The Airship Blackjack' from the Final Fantasy 6 soundtrack."><em>cool</em> airship</span>!) It drops you off at the edge of a vast desert and descends back to Island Island.</p>
 <p>"Did you bring the parts?"</p>
 <p>You turn around to see an Elf completely covered in white clothing, wearing goggles, and riding a large <a href="https://en.wikipedia.org/wiki/Dromedary" target="_blank">camel</a>.</p>
 <p>"Did you bring the parts?" she asks again, louder this time. You aren't sure what parts she's looking for; you're here to figure out why the sand stopped.</p>

@@ -1,6 +1,5 @@
 <?php
-/** @var array $camelCards */
-require_once '7-data.php';
+$camelCards = preg_split("/\r\n|\n|\r/", file_get_contents('7-data.txt'));
 
 /**
  * @param $handCards1
@@ -9,7 +8,7 @@ require_once '7-data.php';
  */
 function orderCardsValue($handCards1, $handCards2): int
 {
-    $cardsValue = ['A', 'K', 'Q', 'J', 'T', 9, 8, 7, 6, 5, 4, 3, 2];
+    $cardsValue = ['A', 'K', 'Q', 'T', 9, 8, 7, 6, 5, 4, 3, 2, 'J'];
 
     foreach ($handCards1 as $index => $card) {
         if (array_search($card, $cardsValue) === array_search($handCards2[$index], $cardsValue)) {
@@ -21,6 +20,34 @@ function orderCardsValue($handCards1, $handCards2): int
 
     //Will never happen with this dataset
     return 0;
+}
+
+/**
+ * Convert values that are "J" to the best other option
+ *
+ * @param $handCards
+ * @param $handCountValues
+ * @return void
+ */
+function mapJCardsInSet($handCards, &$handCountValues): void
+{
+    $JCardInHand = 'J';
+
+    //Find the first (and best) option to convert J to (except J itself)
+    foreach ($handCountValues as $card => $amount) {
+        if ($card !== 'J') {
+            $JCardInHand = $card;
+            break;
+        }
+    }
+
+    //Add the count to this best option and unset J
+    foreach ($handCards as $handCard) {
+        if ($handCard === 'J') {
+            $handCountValues[$JCardInHand]++;
+        }
+    }
+    unset($handCountValues['J']);
 }
 
 //Custom sorting based on the given rules
@@ -35,8 +62,23 @@ usort($camelCards, function ($a, $b) {
     //Get the unique values organized and sort by amount
     $hand1CountValues = array_count_values($handCards1);
     $hand2CountValues = array_count_values($handCards2);
+
+    //Extra sorting to make sure keys are ordered in by the value they have
+    $cardsValue = ['A', 'K', 'Q', 'T', 9, 8, 7, 6, 5, 4, 3, 2, 'J'];
+    uksort($hand1CountValues, fn($a, $b) => array_search($a, $cardsValue) < array_search($b, $cardsValue) ? -1 : 1);
+    uksort($hand2CountValues, fn($a, $b) => array_search($a, $cardsValue) < array_search($b, $cardsValue) ? -1 : 1);
     arsort($hand1CountValues);
     arsort($hand2CountValues);
+
+    //Convert magic for J-cards
+    if (in_array('J', $handCards1) && count($hand1CountValues) > 1) {
+        mapJCardsInSet($handCards1, $hand1CountValues);
+    }
+    if (in_array('J', $handCards2) && count($hand2CountValues) > 1) {
+        mapJCardsInSet($handCards2, $hand2CountValues);
+    }
+
+    /** ALL THE CODE BELOW REMAINS THE SAME AS 7a **/
 
     //If there immediately is a difference in count, return the result
     if (count($hand1CountValues) > count($hand2CountValues)) {
