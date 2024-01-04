@@ -2,7 +2,6 @@
 $data = preg_split("/\r\n|\n|\r/", file_get_contents('4-data.txt'));
 $cards = array_column(array_map(fn($line) => explode(': ', trim(str_replace('Card ', '', $line))), $data), 1, 0);
 
-
 $totalSum = 0;
 $copiesPerCard = [];
 
