@@ -1,9 +1,7 @@
 <?php
-/** @var array $lines */
-require_once '3-data.php';
-
+$data = preg_split("/\r\n|\n|\r/", file_get_contents('3-data.txt'));
+$lines = array_map(fn($line) => str_split($line), $data);
 $totalSum = 0;
-$lines = array_map(fn($line) => str_split($line), $lines);
 
 /**
  * @param false|array $line

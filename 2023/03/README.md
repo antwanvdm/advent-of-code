@@ -1,4 +1,9 @@
-<article class="day-desc"><h2>--- Day 3: Gear Ratios ---</h2><p>You and the Elf eventually reach a <a href="https://en.wikipedia.org/wiki/Gondola_lift" target="_blank">gondola lift</a> station; he says the gondola lift will take you up to the <em>water source</em>, but this is as far as he can bring you. You go inside.</p>
+<article class="day-desc"><h2>--- Day 3: Gear Ratios ---</h2>
+<ul>
+<li><a href="3a.php">Part 1</a></li>
+<li><a href="3b.php">Part 2</a></li>
+</ul>
+<p>You and the Elf eventually reach a <a href="https://en.wikipedia.org/wiki/Gondola_lift" target="_blank">gondola lift</a> station; he says the gondola lift will take you up to the <em>water source</em>, but this is as far as he can bring you. You go inside.</p>
 <p>It doesn't take long to find the gondolas, but there seems to be a problem: they're not moving.</p>
 <p>"Aaah!"</p>
 <p>You turn around to see a slightly-greasy Elf with a wrench and a look of surprise. "Sorry, I wasn't expecting anyone! The gondola lift isn't working right now; it'll still be a while before I can fix it." You offer to help.</p>
