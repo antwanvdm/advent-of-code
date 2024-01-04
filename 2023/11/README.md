@@ -1,4 +1,9 @@
-<article class="day-desc"><h2>--- Day 11: Cosmic Expansion ---</h2><p>You continue following signs for "Hot Springs" and eventually come across an <a href="https://en.wikipedia.org/wiki/Observatory" target="_blank">observatory</a>. The Elf within turns out to be a researcher studying cosmic expansion using the giant telescope here.</p>
+<article class="day-desc"><h2>--- Day 11: Cosmic Expansion ---</h2>
+<ul>
+<li><a href="11a.php">Part 1</a></li>
+<li><a href="11b.php">Part 2</a></li>
+</ul>
+<p>You continue following signs for "Hot Springs" and eventually come across an <a href="https://en.wikipedia.org/wiki/Observatory" target="_blank">observatory</a>. The Elf within turns out to be a researcher studying cosmic expansion using the giant telescope here.</p>
 <p>He doesn't know anything about the missing machine parts; he's only visiting for this research project. However, he confirms that the hot springs are the next-closest area likely to have people; he'll even take you straight there once he's done with today's observation analysis.</p>
 <p>Maybe you can help him with the analysis to speed things up?</p>
 <p>The researcher has collected a bunch of data and compiled the data into a single giant <em>image</em> (your puzzle input). The image includes <em>empty space</em> (<code>.</code>) and <em>galaxies</em> (<code>#</code>). For example:</p>

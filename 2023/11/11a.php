@@ -1,6 +1,6 @@
 <?php
-/** @var array $universe */
-require_once '11-data.php';
+$data = preg_split("/\r\n|\n|\r/", file_get_contents('11-data.txt'));
+$universe = array_map(fn($line) => str_split($line), $data);
 
 /**
  * @param $universe
@@ -43,7 +43,6 @@ function expandUniverse($universe): array
     return $universe;
 }
 
-$universe = array_map(fn($line) => str_split($line), $universe);
 $universe = expandUniverse($universe);
 
 //Gather all the indexes from the galaxies in the universe

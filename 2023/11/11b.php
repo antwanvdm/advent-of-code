@@ -1,6 +1,6 @@
 <?php
-/** @var array $universe */
-require_once '11-data.php';
+$data = preg_split("/\r\n|\n|\r/", file_get_contents('11-data.txt'));
+$universe = array_map(fn($line) => str_split($line), $data);
 
 /**
  * @param $universe
@@ -48,8 +48,6 @@ function expandUniverse($universe, &$appendedRows = [], &$appendedColumns = []):
 
     return $universe;
 }
-
-$universe = array_map(fn($line) => str_split($line), $universe);
 
 //I now store 2 values to remember which rows and columns had gaps
 $universe = expandUniverse($universe, $appendedRows, $appendedColumns);
