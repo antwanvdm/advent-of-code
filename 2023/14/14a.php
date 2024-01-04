@@ -1,6 +1,5 @@
 <?php
-/** @var array $lines */
-require_once '14-data.php';
+$lines = preg_split("/\r\n|\n|\r/", file_get_contents('14-data.txt'));
 
 //Transpose because way easier to handle
 $transposedLines = array_map(fn($line) => implode('', $line), array_map(null, ...array_map(fn($line) => str_split($line), $lines)));

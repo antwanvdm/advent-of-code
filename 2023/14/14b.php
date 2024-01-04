@@ -1,6 +1,5 @@
 <?php
-/** @var array $lines */
-require_once '14-data.php';
+$lines = preg_split("/\r\n|\n|\r/", file_get_contents('14-data.txt'));
 
 /**
  * @param $lines

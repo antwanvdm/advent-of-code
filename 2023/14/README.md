@@ -1,4 +1,9 @@
-<article class="day-desc"><h2>--- Day 14: Parabolic Reflector Dish ---</h2><p>You reach the place where all of the mirrors were pointing: a massive <a href="https://en.wikipedia.org/wiki/Parabolic_reflector" target="_blank">parabolic reflector dish</a> <span title="Why, where do you attach YOUR massive parabolic reflector dishes?">attached</span> to the side of another large mountain.</p>
+<article class="day-desc"><h2>--- Day 14: Parabolic Reflector Dish ---</h2>
+<ul>
+<li><a href="14a.php">Part 1</a></li>
+<li><a href="14b.php">Part 2</a></li>
+</ul>
+<p>You reach the place where all of the mirrors were pointing: a massive <a href="https://en.wikipedia.org/wiki/Parabolic_reflector" target="_blank">parabolic reflector dish</a> <span title="Why, where do you attach YOUR massive parabolic reflector dishes?">attached</span> to the side of another large mountain.</p>
 <p>The dish is made up of many small mirrors, but while the mirrors themselves are roughly in the shape of a parabolic reflector dish, each individual mirror seems to be pointing in slightly the wrong direction. If the dish is meant to focus light, all it's doing right now is sending it in a vague direction.</p>
 <p>This system must be what provides the energy for the lava! If you focus the reflector dish, maybe you can go where it's pointing and use the light to fix the lava production.</p>
 <p>Upon closer inspection, the individual mirrors each appear to be connected via an elaborate system of ropes and pulleys to a large metal platform below the dish. The platform is covered in large rocks of various shapes. Depending on their position, the weight of the rocks deforms the platform, and the shape of the platform controls which ropes move and ultimately the focus of the dish.</p>
