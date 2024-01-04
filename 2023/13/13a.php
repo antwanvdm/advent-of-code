@@ -1,6 +1,6 @@
 <?php
-/** @var array $mirrors */
-require_once '13-data.php';
+$data = preg_split("/\r\n\r\n|\n\n|\r\r/", file_get_contents('13-data.txt'));
+$mirrors = array_map(fn($mirror) => preg_split("/\r\n|\n|\r/", $mirror), $data);
 
 /**
  * Switch rows & columns, as rows are easier to check upon
