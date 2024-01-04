@@ -1,7 +1,5 @@
 <?php
-/** @var array $strings */
-require_once '1-data.php';
-
+$strings = preg_split("/\r\n|\n|\r/", file_get_contents('1-data.txt'));
 $digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 $totalSum = 0;
