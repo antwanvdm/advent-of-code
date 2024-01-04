@@ -1,6 +1,6 @@
 <?php
-/** @var array $games */
-require_once '2-data.php';
+$data = preg_split("/\r\n|\n|\r/", file_get_contents('2-data.txt'));
+$games = array_column(array_map(fn($line) => explode(': ', str_replace('Game ', '', $line)), $data), 1, 0);
 
 $gameLimitations = [
     'red' => 12,
