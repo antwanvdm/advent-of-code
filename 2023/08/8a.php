@@ -1,12 +1,11 @@
 <?php
-/** @var array $data */
-require_once '8-data.php';
+$data = preg_split("/\r\n\r\n|\n\n|\r\r/", file_get_contents('8-data.txt'));
+$instructions = str_split($data[0]);
+$rawRoutes = preg_split("/\r\n|\n|\r/", $data[1]);
 
-$instructions = str_split($data['instructions']);
+//Make a nice mapping, so we can easily target L or R based on the instructions
 $routes = [];
-
-//Make a nice mapping so we can easily target L or R based on the instructions
-foreach ($data['routes'] as $route) {
+foreach ($rawRoutes as $route) {
     list($entry, $options) = explode(' = ', $route);
     list($L, $R) = explode(', ', str_replace(['(', ')'], '', $options));
     $routes[$entry] = ['L' => $L, 'R' => $R];
