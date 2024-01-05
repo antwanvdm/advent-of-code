@@ -20,23 +20,27 @@ function in_visited_array($path, &$visited): bool
     return false;
 }
 
-function move($heatLoss, $path, &$paths, &$visited, $lavaLines, $row, $column): void
+function move($path, &$paths, &$visited, $lavaLines): void
 {
-    $path['lastMoves'][] = $path['direction'];
     $lastMoves = array_slice($path['lastMoves'], -3, 3);
     $lastThreeMovesAreSame = count($lastMoves) === 3 && count(array_unique($lastMoves)) === 1;
-    $path['heatLoss'] += $heatLoss;
 
-    $up = $lavaLines[$row - 1][$column] ?? false;
-    $down = $lavaLines[$row + 1][$column] ?? false;
-    $left = $lavaLines[$row][$column - 1] ?? false;
-    $right = $lavaLines[$row][$column + 1] ?? false;
+    $up = $lavaLines[$path['row'] - 1][$path['column']] ?? false;
+    $down = $lavaLines[$path['row'] + 1][$path['column']] ?? false;
+    $left = $lavaLines[$path['row']][$path['column'] - 1] ?? false;
+    $right = $lavaLines[$path['row']][$path['column'] + 1] ?? false;
 
     $options = [
         'right' => ['up', 'down', 'right'],
         'left' => ['up', 'down', 'left'],
         'up' => ['right', 'left', 'up'],
         'down' => ['right', 'left', 'down'],
+    ];
+    $keys = [
+        'up' => [-1, 0],
+        'down' => [1, 0],
+        'left' => [0, -1],
+        'right' => [0, 1],
     ];
 
     $pathOptions = $options[$path['direction']];
@@ -45,21 +49,16 @@ function move($heatLoss, $path, &$paths, &$visited, $lavaLines, $row, $column): 
     }
 
     foreach ($pathOptions as $pathOption) {
-        $upPath = array_merge($path, ['direction' => 'up', 'row' => $path['row'] - 1]);
-        if ($pathOption === 'up' && $up !== false && !in_visited_array($upPath, $visited)) {
-            $paths[] = $upPath;
-        }
-        $downPath = array_merge($path, ['direction' => 'down', 'row' => $path['row'] + 1]);
-        if ($pathOption === 'down' && $down !== false && !in_visited_array($downPath, $visited)) {
-            $paths[] = $downPath;
-        }
-        $leftPath = array_merge($path, ['direction' => 'left', 'column' => $path['column'] - 1]);
-        if ($pathOption === 'left' && $left !== false && !in_visited_array($leftPath, $visited)) {
-            $paths[] = $leftPath;
-        }
-        $rightPath = array_merge($path, ['direction' => 'right', 'column' => $path['column'] + 1]);
-        if ($pathOption === 'right' && $right !== false && !in_visited_array($rightPath, $visited)) {
-            $paths[] = $rightPath;
+        $nextPath = [
+            'direction' => $pathOption,
+            'row' => $path['row'] + $keys[$pathOption][0],
+            'column' => $path['column'] + $keys[$pathOption][1],
+            'heatLoss' => $path['heatLoss'] + $$pathOption ?? 0,
+            'lastMoves' => array_merge($path['lastMoves'], [$pathOption])
+        ];
+        if ($$pathOption !== false && !in_visited_array($nextPath, $visited)) {
+            $paths[] = $nextPath;
+            usort($paths, fn($a, $b) => $a['heatLoss'] < $b['heatLoss'] ? -1 : 1);
         }
     }
 }
@@ -71,26 +70,19 @@ $paths = [
 $leastHeatLoss = 0;
 $visited = [];
 while (count($paths) > 0) {
-    foreach ($paths as $index => $path) {
-        //Break out once the first arrived (which should be the cheapest
-        if ($path['row'] === count($lavaLines) - 1 && $path['column'] === count($lavaLines[0]) - 1) {
-            $leastHeatLoss = $path['heatLoss'];
-            break 2;
-        }
-
-        //Make the moves (new paths)
-        move((int)$lavaLines[$path['row']][$path['column']], $path, $paths, $visited, $lavaLines, $path['row'], $path['column']);
-
-        //Always unset current path as we are creating new paths
-        unset($paths[$index]);
+    $path = array_shift($paths);
+    //Break out once the first arrived (which should be the cheapest)
+    if ($path['row'] === count($lavaLines) - 1 && $path['column'] === count($lavaLines[0]) - 1) {
+        $leastHeatLoss = $path['heatLoss'];
+        print_r($path['lastMoves']);
+        break;
     }
-    usort($paths, fn($a, $b) => $a['heatLoss'] < $b['heatLoss'] ? -1 : 1);
 
-    //Sort on cheapest option
+    //Make the moves (new paths)
+    move($path, $paths, $visited, $lavaLines);
     $test = '';
 }
 
-//print_r($paths);
 echo $leastHeatLoss;
 
 
@@ -98,3 +90,4 @@ echo $leastHeatLoss;
 
 
 //1440 TOO HIGH
+//1261 TOO HIGH
