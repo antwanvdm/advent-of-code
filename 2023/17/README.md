@@ -1,6 +1,6 @@
 <article class="day-desc"><h2>--- Day 17: Clumsy Crucible ---</h2>
 <ul>
-<li>Part 1 (WIP)</li>
+<li><a href="17a.php">Part 1</a></li>
 <li>Part 2 (WIP)</li>
 </ul>
 <p>The lava starts flowing rapidly once the Lava Production Facility is operational. As you <span title="see you soon?">leave</span>, the reindeer offers you a parachute, allowing you to quickly reach Gear Island.</p>
